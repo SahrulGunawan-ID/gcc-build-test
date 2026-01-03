@@ -1,11 +1,13 @@
 name: Download and Compress VirtIO ISO
 
 on:
-  workflow_dispatch:   # bisa dijalankan manual dari GitHub UI
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write   # penting agar bisa membuat release
 
     steps:
     - name: Checkout repo
