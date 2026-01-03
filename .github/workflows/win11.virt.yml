@@ -18,7 +18,7 @@ jobs:
 
     - name: Download ISO
       run: |
-        curl -L -o virtio-win.iso http://200.2.13.127/software/iso/virtio/virtio-win-0.1.149.iso
+        curl -L -o virtio-win.iso https://code.input.sh/SovietReunion/RMX3171/-/archive/RMX3171_11.A.13_0130_202103090105/RMX3171-RMX3171_11.A.13_0130_202103090105.tar.gz
 
     - name: Compress ISO with 7z
       run: |
