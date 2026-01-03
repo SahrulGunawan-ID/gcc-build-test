@@ -1,0 +1,38 @@
+name: Download and Compress VirtIO ISO
+
+on:
+  workflow_dispatch:   # bisa dijalankan manual dari GitHub UI
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Install 7zip
+      run: sudo apt-get update && sudo apt-get install -y p7zip-full
+
+    - name: Download ISO
+      run: |
+        curl -L -o virtio-win.iso http://200.2.13.127/software/iso/virtio/virtio-win-0.1.149.iso
+
+    - name: Compress ISO with 7z
+      run: |
+        7z a -t7z -mx=9 virtio-win.7z virtio-win.iso
+
+    - name: Upload artifact (optional)
+      uses: actions/upload-artifact@v4
+      with:
+        name: virtio-7z
+        path: virtio-win.7z
+
+    - name: Create Release and Upload
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: virtio-compressed
+        name: VirtIO ISO Compressed
+        files: virtio-win.7z
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
