@@ -19,11 +19,14 @@ jobs:
     - name: Download ISO
       run: |
         curl -L -o virtio-win.iso https://code.input.sh/SovietReunion/RMX3171/-/archive/RMX3171_11.A.13_0130_202103090105/RMX3171-RMX3171_11.A.13_0130_202103090105.tar.gz
-
     - name: Compress ISO with 7z
       run: |
         7z a -t7z -mx=9 virtio-win.7z virtio-win.iso
-
+    
+    - name: Delete Old Cache
+      run : |
+         sudo rm -rf virtio-win.iso
+   
     - name: Upload artifact (optional)
       uses: actions/upload-artifact@v4
       with:
